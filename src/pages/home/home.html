@@ -1,4 +1,4 @@
-eader>
+<ion-header>
   <ion-navbar>
     <ion-title>
       Buscador de libros.
@@ -16,11 +16,18 @@ eader>
   </ion-item>
 <ion-list>
 <ion-item>
-      <ion-card padding *ngFor="let imprimir of resultado">
+      <ion-card padding *ngFor="let imprimir of resultado" (click)="showBook(imprimir.title_suggest,imprimir.author_name,imprimir.first_publish_year, imprimir.cover_i )">
         <div class="card-title">{{imprimir.title_suggest}}</div>
+        <div class="card-subtitle">
+          <p *ngIf="imprimir.cover_i != null">
+          <img src="http://covers.openlibrary.org/b/id/{{imprimir.cover_i}}-L.jpg" /></p>
+          <p *ngIf="imprimir.cover_i  == null">
+            <img width="10" src="../../assets/imgs/ic_placeholder.png" />
+          </p>
+        </div>
+        <div class="card-subtitle">{{imprimir.author_name}}</div>
         <div class="card-subtitle">{{imprimir.first_publish_year}}</div>
         <div class="card-subtitle">{{imprimir.language}}</div>
-        <ion-icon name="book" (click)="show()"></ion-icon>
       </ion-card>
     </ion-item>
   </ion-list>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 import 'rxjs/Rx';
+import { ShowPage } from '../show/show';
 
 @Component({
   selector: 'page-home',
@@ -11,6 +12,10 @@ import 'rxjs/Rx';
 export class HomePage {
   libro: string;
   resultado: any;
+  titulo: "hola";
+  imprimir: any;
+  author_name: any;
+  autor: string;
 
   constructor(public navCtrl: NavController, public http:Http, private toastCtrl:ToastController) {
 
@@ -19,19 +24,7 @@ export class HomePage {
   search(){
     this.http.get('http://openlibrary.org/search.json?q=' + this.libro).map(res => res.json()).subscribe(data => {
       this.resultado = data.docs;
-      console.log(this.resultado);
-     
-      console.log(this.resultado.length );
-      console.log("///////////////////////////////////////////////////");
-      for (var i = 0; i < this.resultado.length; i++){
-        console.log(this.resultado[i].title_suggest);
-      }
-      console.log("///////////////////////////////////////////////////");
-      
-      console.log("///////////////////////////////////////////////////");
-      for (var a = 0; a < this.resultado.length; a++){
-        console.log(this.resultado[a].first_publish_year);
-      }
+     console.log(this.resultado);
     });
   }
   
@@ -44,4 +37,14 @@ export class HomePage {
     toast.present();
   }
 
+  showBook(title_suggest, author_name, first_year, cover_i){
+    //console.log(this.libro);
+    //console.log(author_name);
+    this.autor = author_name[0];
+    console.log('ionViewDidLoad HomePage');
+    console.log(cover_i);
+
+    this.navCtrl.push(ShowPage, {autor: this.autor, titulo: title_suggest, ano: first_year, cover: cover_i});
+
+  }
 }

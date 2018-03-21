@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Detalle del libro.
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <div></div>
+    <p *ngIf="cover != null">
+        <img src="http://covers.openlibrary.org/b/id/{{cover}}-L.jpg" /></p>
+        <p *ngIf="cover  == null">
+          <img with="100%" src="../../assets/imgs/ic_placeholder2.png" />
+        </p>
+      <div class="card-title">{{ titulo }}</div>
+      <div class="card-title">{{ autor }}</div>
+      <div class="card-title">{{ ano }}</div>
+</ion-item>
+</ion-content>
